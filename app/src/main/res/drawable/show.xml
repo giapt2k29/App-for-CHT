@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bóng -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#50000000" /> <!-- Màu bóng với độ trong suốt -->
+            <corners android:radius="4dp" /> <!-- Độ bo góc của bóng -->
+        </shape>
+    </item>
+    <!-- Đặt phần tử gốc lên trên bóng -->
+    <item android:left="2dp" android:top="2dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+</layer-list>

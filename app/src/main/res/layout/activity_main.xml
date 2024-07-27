@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+    <View
+        android:id="@+id/rectangles"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size75dp"
+        android:background="@color/blue"
+        android:layout_alignParentTop="true"
+    />
+    <ImageButton
+        android:id="@+id/notificationbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="375dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/blue"
+        android:src="@drawable/notification"/>
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text25sp"
+        android:textColor="@color/white"
+        android:text="Chuyên Hà Tĩnh"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        >
+    </TextView>
+    <TextView
+        android:layout_below="@id/rectangles"
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Nguyễn Văn Giáp | 12T2"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="@dimen/size10dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/text15sp"
+        android:padding="@dimen/size10dp"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/text1"
+        android:layout_margin="@dimen/size10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0">
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/white"
+                android:id="@+id/btn1"
+                android:layout_width="@dimen/size100dp"
+                android:layout_height="@dimen/size100dp"
+                android:layout_margin="8dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="20dp">
+                <ImageButton
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="9dp"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/calendar" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timetable"
+                android:textSize="@dimen/text15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0">
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/size100dp"
+                android:layout_height="@dimen/size100dp"
+                android:layout_margin="8dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/white">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="9dp"
+                    android:id="@+id/imageView2"
+                    app:srcCompat="@drawable/study"
+                    android:background="@color/white" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score"
+                android:textSize="@dimen/text15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/layout1"
+        android:layout_margin="@dimen/size10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0">
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/white"
+                android:layout_width="@dimen/size100dp"
+                android:layout_height="@dimen/size100dp"
+                android:layout_margin="8dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="20dp">
+                <ImageButton
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="9dp"
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/news" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/news"
+                android:textSize="@dimen/text15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0">
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/white"
+                android:layout_width="@dimen/size100dp"
+                android:layout_height="@dimen/size100dp"
+                android:layout_margin="8dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="20dp">
+                <ImageButton
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="9dp"
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/class1"
+                    android:background="@color/white"/>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/class1"
+                android:textSize="@dimen/text15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout2"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+        <LinearLayout
+            android:id="@+id/thanhtimkiem"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:background="@drawable/bogoc">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_gray"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/size10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trang chủ"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#3232324D"/>
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/search_gray"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/size10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tìm kiếm"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#3232324D"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile_gray"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/size10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cá nhân"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#3232324D"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            />
+    </LinearLayout>
+</RelativeLayout>

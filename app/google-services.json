@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "129885303840",
+    "project_id": "chtproject-8d45b",
+    "storage_bucket": "chtproject-8d45b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129885303840:android:1da3b17ec61dc5571c7845",
+        "android_client_info": {
+          "package_name": "com.example.cht"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJPOcBZHnzVwZgNlX8t1f6uCPmBNT0fvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CHT</string>
+    <string name="timetable">Thời khoá biểu</string>
+    <string name="news">Thông tin</string>
+    <string name="score">Kết quả học tập</string>
+    <string name="class1">Lớp học</string>
+
+</resources>
