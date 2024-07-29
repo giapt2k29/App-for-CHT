@@ -55,7 +55,8 @@
             android:background="@drawable/edittext"
             android:layout_marginLeft="@dimen/size10dp"
             android:layout_marginRight="@dimen/size10dp"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            android:imeOptions="actionDone|actionNext|actionSearch"/>
 
         <ImageButton
             android:id="@+id/search_button"

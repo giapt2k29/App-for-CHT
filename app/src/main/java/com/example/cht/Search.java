@@ -4,7 +4,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -60,6 +62,7 @@ public class Search extends AppCompatActivity {
         Radio = findViewById(R.id.radio1);
         btn = findViewById(R.id.search_button);
 
+
         resultText1 = findViewById(R.id.result_text1); // Tham chiếu tới TextView kết quả
         resultText2 = findViewById(R.id.result_text2);
         resultText3 = findViewById(R.id.result_text3);
@@ -82,79 +85,98 @@ public class Search extends AppCompatActivity {
             }
         });
 
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        actionId == EditorInfo.IME_ACTION_GO ||
+                        actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        actionId == EditorInfo.IME_ACTION_NEXT ||
+                        (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER || event.getAction() == KeyEvent.ACTION_DOWN)) {
+                    btn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    String Count = "1";
-
-                    db = openOrCreateDatabase(res, MODE_PRIVATE, null);
-
-                    String name = editText.getText().toString();
-
-                    List<StringBuffer> stringBuffer = teacherDAO.check(db, name);
-
-                    List<StringBuffer> stringBuffer1 = teacherDAO.checkimage(db, name);
-
-                    resultText1.setText("");
-                    resultCard1.setVisibility(View.GONE);
-                    resultText2.setText("");
-                    resultCard2.setVisibility(View.GONE);
-                    resultText3.setText("");
-                    resultCard3.setVisibility(View.GONE);
-                    imageView2.setVisibility(View.GONE);
-                    imageView3.setVisibility(View.GONE);
-                    imageView1.setVisibility(View.GONE);
-
-                    if(stringBuffer.size() == 1) {
-                        imageView1.setVisibility(View.VISIBLE);
-                        resultText1.setText(stringBuffer.get(0).toString());
-                        resultCard1.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(0).toString())
-                                .into(imageView1);
-                    }
-                    if(stringBuffer.size() == 2) {
-                        imageView1.setVisibility(View.VISIBLE);
-                        imageView2.setVisibility(View.VISIBLE);
-                        resultText1.setText(stringBuffer.get(0).toString());
-                        resultCard1.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(0).toString())
-                                .into(imageView1);
-                        resultText2.setText(stringBuffer.get(1).toString());
-                        resultCard2.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(1).toString())
-                                .into(imageView2);
-                    }
-                    if(stringBuffer.size() == 3) {
-                        imageView1.setVisibility(View.VISIBLE);
-                        imageView2.setVisibility(View.VISIBLE);
-                        imageView3.setVisibility(View.VISIBLE);
-                        resultText1.setText(stringBuffer.get(0).toString());
-                        resultCard1.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(0).toString())
-                                .into(imageView1);
-                        resultText2.setText(stringBuffer.get(1).toString());
-                        resultCard2.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(1).toString())
-                                .into(imageView2);
-                        resultText3.setText(stringBuffer.get(2).toString());
-                        resultCard3.setVisibility(View.VISIBLE);
-                        Glide.with(Search.this)
-                                .load(stringBuffer1.get(2).toString())
-                                .into(imageView3);
-                    }
+                if(res == "STUDENT") {
+                    Toast.makeText(Search.this, "Chưa có database học sinh.", Toast.LENGTH_LONG).show();
                 }
-                catch (Exception e) {
-                    Log.d("Loi khi truy vấn","Loi khi truy vấn", e);
+                else if(res == "TEACHER") {
+                    try {
+                        String Count = "1";
 
-                    String msg = "Lỗi khi truy vấn";
+                        db = openOrCreateDatabase(res, MODE_PRIVATE, null);
 
-                    Toast.makeText(Search.this, msg, Toast.LENGTH_LONG).show();
+                        String name = editText.getText().toString();
+
+                        List<StringBuffer> stringBuffer = teacherDAO.check(db, name);
+
+                        List<StringBuffer> stringBuffer1 = teacherDAO.checkimage(db, name);
+
+                        resultText1.setText("");
+                        resultCard1.setVisibility(View.GONE);
+                        resultText2.setText("");
+                        resultCard2.setVisibility(View.GONE);
+                        resultText3.setText("");
+                        resultCard3.setVisibility(View.GONE);
+                        imageView2.setVisibility(View.GONE);
+                        imageView3.setVisibility(View.GONE);
+                        imageView1.setVisibility(View.GONE);
+
+                        if (stringBuffer.size() == 1) {
+                            imageView1.setVisibility(View.VISIBLE);
+                            resultText1.setText(stringBuffer.get(0).toString());
+                            resultCard1.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(0).toString())
+                                    .into(imageView1);
+                        }
+                        if (stringBuffer.size() == 2) {
+                            imageView1.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.VISIBLE);
+                            resultText1.setText(stringBuffer.get(0).toString());
+                            resultCard1.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(0).toString())
+                                    .into(imageView1);
+                            resultText2.setText(stringBuffer.get(1).toString());
+                            resultCard2.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(1).toString())
+                                    .into(imageView2);
+                        }
+                        if (stringBuffer.size() == 3) {
+                            imageView1.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.VISIBLE);
+                            imageView3.setVisibility(View.VISIBLE);
+                            resultText1.setText(stringBuffer.get(0).toString());
+                            resultCard1.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(0).toString())
+                                    .into(imageView1);
+                            resultText2.setText(stringBuffer.get(1).toString());
+                            resultCard2.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(1).toString())
+                                    .into(imageView2);
+                            resultText3.setText(stringBuffer.get(2).toString());
+                            resultCard3.setVisibility(View.VISIBLE);
+                            Glide.with(Search.this)
+                                    .load(stringBuffer1.get(2).toString())
+                                    .into(imageView3);
+                        }
+                    } catch (Exception e) {
+                        Log.d("Loi khi truy vấn", "Loi khi truy vấn", e);
+
+                        String msg = "Lỗi khi truy vấn";
+
+                        Toast.makeText(Search.this, msg, Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

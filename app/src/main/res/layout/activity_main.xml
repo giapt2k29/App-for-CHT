@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Nguyễn Văn Giáp | 12T2"
+        android:text="Admin | 12T2"
         android:textStyle="bold"
         android:drawableLeft="@drawable/user"
         android:drawablePadding="@dimen/size10dp"

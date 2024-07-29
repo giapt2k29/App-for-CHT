@@ -1,11 +1,11 @@
 package com.example.cht;
 
 import android.app.Dialog;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.service.autofill.Dataset;
 import android.text.SpannableStringBuilder;
 import android.text.style.BulletSpan;
 import android.util.Log;
@@ -16,7 +16,6 @@ import android.view.Window;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class Calendarclass extends AppCompatActivity {
     String Change = "";
@@ -81,9 +79,122 @@ public class Calendarclass extends AppCompatActivity {
         t5 = findViewById(R.id.T5);
         imageButton = findViewById(R.id.choose);
 
+        String Classsetting = "";
+        switch (Class) {
+            case "12T1":
+                Classsetting = "12 Toán 1";
+                break;
+            case "12T2":
+                Classsetting = "12 Toán 2";
+                break;
+            case "12L":
+                Classsetting = "12 Lý";
+                break;
+            case "12H":
+                Classsetting = "12 Hoá";
+                break;
+            case "12S":
+                Classsetting = "12 Sinh";
+                break;
+            case "12TIN":
+                Classsetting = "12 Tin";
+                break;
+            case "12V":
+                Classsetting = "12 Văn";
+                break;
+            case "12A1":
+                Classsetting = "12 Anh 1";
+                break;
+            case "12A2":
+                Classsetting = "12 Anh 2";
+                break;
+            case "12P":
+                Classsetting = "12 Pháp";
+                break;
+            case "12SD":
+                Classsetting = "12 Sử - Địa";
+                break;
+            case "11T1":
+                Classsetting = "11 Toán 1";
+                break;
+            case "11T2":
+                Classsetting = "11 Toán 2";
+                break;
+            case "11L":
+                Classsetting = "11 Lý";
+                break;
+            case "11H":
+                Classsetting = "11 Hoá";
+                break;
+            case "11SINH":
+                Classsetting = "11 Sinh";
+                break;
+            case "11TIN":
+                Classsetting = "11 Tin";
+                break;
+            case "11V":
+                Classsetting = "11 Văn";
+                break;
+            case "11A1":
+                Classsetting = "11 Anh 1";
+                break;
+            case "11A2":
+                Classsetting = "11 Anh 2";
+                break;
+            case "11P":
+                Classsetting = "11 Pháp";
+                break;
+            case "11SU":
+                Classsetting = "11 Sử";
+                break;
+            case "11DIA":
+                Classsetting = "11 Địa";
+                break;
+            case "10T1":
+                Classsetting = "10 Toán 1";
+                break;
+            case "10T2":
+                Classsetting = "10 Toán 2";
+                break;
+            case "10L":
+                Classsetting = "10 Lý";
+                break;
+            case "10H":
+                Classsetting = "10 Hoá";
+                break;
+            case "10SINH":
+                Classsetting = "10 Sinh";
+                break;
+            case "10TIN":
+                Classsetting = "10 Tin";
+                break;
+            case "10V":
+                Classsetting = "10 Văn";
+                break;
+            case "10A1":
+                Classsetting = "10 Anh 1";
+                break;
+            case "10A2":
+                Classsetting = "10 Anh 2";
+                break;
+            case "10P":
+                Classsetting = "10 Pháp";
+                break;
+            case "10SU":
+                Classsetting = "10 Sử";
+                break;
+            case "10DIA":
+                Classsetting = "10 Địa";
+                break;
+            case "10TRUNG":
+                Classsetting = "10 Trung";
+                break;
+
+        }
+
         Calendar today = Calendar.getInstance();
         int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
-        txt.setText("Bạn đang xem thời khoá biểu lớp " + Class);
+        txt.setText("Bạn đang xem thời khoá biểu lớp " + Classsetting);
         String finalPath = path;
         String finalDateset = Dateset;
 
@@ -125,6 +236,10 @@ public class Calendarclass extends AppCompatActivity {
                 path = "/" + Class + "/T7";
                 Dateset = "7";
                 break;
+            case Calendar.SUNDAY:
+                path = "/" + Class + "/CN";
+                Dateset = "1";
+                break;
         }
 
         fetchDataAndUpdateUI(databaseReference, path, Dateset);
@@ -165,6 +280,10 @@ public class Calendarclass extends AppCompatActivity {
                         path = "/" + Class + "/T7";
                         Dateset = "7";
                         break;
+                    case Calendar.SUNDAY:
+                        path = "/" + Class + "/CN";
+                        Dateset = "1";
+                        break;
                 }
                 fetchDataAndUpdateUI(databaseReference, path, Dateset);
             }
@@ -179,16 +298,38 @@ public class Calendarclass extends AppCompatActivity {
             SpannableStringBuilder stringBuilder2 = new SpannableStringBuilder();
             SpannableStringBuilder stringBuilder3 = new SpannableStringBuilder();
             SpannableStringBuilder stringBuilder4 = new SpannableStringBuilder();
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String stringValue = snapshot.getValue(String.class);
-                res = "";
-                T1 = T2 = T3 = T4 = T5 = null; // Reset the values
+                if (Dateset != "1") {
+                    txt1.setVisibility(View.VISIBLE);
+                    txt2.setVisibility(View.VISIBLE);
+                    txt3.setVisibility(View.VISIBLE);
+                    txt4.setVisibility(View.VISIBLE);
+                    txt5.setVisibility(View.VISIBLE);
+                    String stringValue = snapshot.getValue(String.class);
+                    res = "";
+                    T1 = T2 = T3 = T4 = T5 = null; // Reset the values
 
-                for (int i = 0; i < stringValue.length(); i++) {
-                    if (stringValue.charAt(i) != ',') {
-                        res += stringValue.charAt(i);
-                    } else {
+                    for (int i = 0; i < stringValue.length(); i++) {
+                        if (stringValue.charAt(i) != ',') {
+                            res += stringValue.charAt(i);
+                        } else {
+                            if (T1 == null) {
+                                T1 = res;
+                            } else if (T2 == null) {
+                                T2 = res;
+                            } else if (T3 == null) {
+                                T3 = res;
+                            } else if (T4 == null) {
+                                T4 = res;
+                            } else if (T5 == null) {
+                                T5 = res;
+                            }
+                            res = "";
+                        }
+                    }
+                    if (!res.isEmpty()) {
                         if (T1 == null) {
                             T1 = res;
                         } else if (T2 == null) {
@@ -200,80 +341,74 @@ public class Calendarclass extends AppCompatActivity {
                         } else if (T5 == null) {
                             T5 = res;
                         }
-                        res = "";
                     }
-                }
-                if (!res.isEmpty()) {
-                    if (T1 == null) {
-                        T1 = res;
-                    } else if (T2 == null) {
-                        T2 = res;
-                    } else if (T3 == null) {
-                        T3 = res;
-                    } else if (T4 == null) {
-                        T4 = res;
-                    } else if (T5 == null) {
-                        T5 = res;
+
+                    addBulletPoint(stringBuilder, "06:45      ", false);
+                    addBulletPoint(stringBuilder, "Môn học: " + T1 + "\n", true);
+                    addBulletPoint(stringBuilder, "\n", false);
+                    addBulletPoint(stringBuilder, "     |           ", false);
+                    addBulletPoint(stringBuilder, "Sáng thứ " + Dateset + ", tiết 1" + "\n", true);
+                    addBulletPoint(stringBuilder, "\n", false);
+                    addBulletPoint(stringBuilder, "07:30      ", false);
+                    addBulletPoint(stringBuilder, "Giáo viên: null", false);
+                    txt1.setText(stringBuilder);
+
+                    addBulletPoint(stringBuilder1, "07:35      ", false);
+                    addBulletPoint(stringBuilder1, "Môn học: " + T2 + "\n", true);
+                    addBulletPoint(stringBuilder1, "\n", false);
+                    addBulletPoint(stringBuilder1, "     |           ", false);
+                    addBulletPoint(stringBuilder1, "Sáng thứ " + Dateset + ", tiết 2" + "\n", true);
+                    addBulletPoint(stringBuilder1, "\n", false);
+                    addBulletPoint(stringBuilder1, "08:20      ", false);
+                    addBulletPoint(stringBuilder1, "Giáo viên: null", false);
+                    txt2.setText(stringBuilder1);
+
+                    addBulletPoint(stringBuilder2, "08:35      ", false);
+                    addBulletPoint(stringBuilder2, "Môn học: " + T3 + "\n", true);
+                    addBulletPoint(stringBuilder2, "\n", false);
+                    addBulletPoint(stringBuilder2, "     |           ", false);
+                    addBulletPoint(stringBuilder2, "Sáng thứ " + Dateset + ", tiết 3" + "\n", true);
+                    addBulletPoint(stringBuilder2, "\n", false);
+                    addBulletPoint(stringBuilder2, "09:15      ", false);
+                    addBulletPoint(stringBuilder2, "Giáo viên: null", false);
+                    txt3.setText(stringBuilder2);
+
+                    addBulletPoint(stringBuilder3, "09:15      ", false);
+                    addBulletPoint(stringBuilder3, "Môn học: " + T4 + "\n", true);
+                    addBulletPoint(stringBuilder3, "\n", false);
+                    addBulletPoint(stringBuilder3, "     |           ", false);
+                    addBulletPoint(stringBuilder3, "Sáng thứ " + Dateset + ", tiết 4" + "\n", true);
+                    addBulletPoint(stringBuilder3, "\n", false);
+                    addBulletPoint(stringBuilder3, "10:05      ", false);
+                    addBulletPoint(stringBuilder3, "Giáo viên: null", false);
+                    txt4.setText(stringBuilder3);
+
+                    if (T5 != null) {
+                        addBulletPoint(stringBuilder4, "10:20      ", false);
+                        addBulletPoint(stringBuilder4, "Môn học: " + T5 + "\n", true);
+                        addBulletPoint(stringBuilder4, "\n", false);
+                        addBulletPoint(stringBuilder4, "     |           ", false);
+                        addBulletPoint(stringBuilder4, "Sáng thứ " + Dateset + ", tiết 5" + "\n", true);
+                        addBulletPoint(stringBuilder4, "\n", false);
+                        addBulletPoint(stringBuilder4, "11:05      ", false);
+                        addBulletPoint(stringBuilder4, "Giáo viên: null", false);
+                        txt5.setText(stringBuilder4);
                     }
+                    t1.setVisibility(T1 != null ? View.VISIBLE : View.GONE);
+                    t2.setVisibility(T2 != null ? View.VISIBLE : View.GONE);
+                    t3.setVisibility(T3 != null ? View.VISIBLE : View.GONE);
+                    t4.setVisibility(T4 != null ? View.VISIBLE : View.GONE);
+                    t5.setVisibility(T5 != null ? View.VISIBLE : View.GONE);
                 }
-
-                addBulletPoint(stringBuilder, "06:45      ", false);
-                addBulletPoint(stringBuilder, "Môn học: " + T1 + "\n", true);
-                addBulletPoint(stringBuilder, "\n", false);
-                addBulletPoint(stringBuilder, "     |           ", false);
-                addBulletPoint(stringBuilder, "Sáng thứ " + Dateset + ", tiết 1" + "\n", true);
-                addBulletPoint(stringBuilder, "\n", false);
-                addBulletPoint(stringBuilder, "07:30      ", false);
-                addBulletPoint(stringBuilder, "Giáo viên: null", false);
-                txt1.setText(stringBuilder);
-
-                addBulletPoint(stringBuilder1, "07:35      ", false);
-                addBulletPoint(stringBuilder1, "Môn học: " + T2 + "\n", true);
-                addBulletPoint(stringBuilder1, "\n", false);
-                addBulletPoint(stringBuilder1, "     |           ", false);
-                addBulletPoint(stringBuilder1, "Sáng thứ " + Dateset + ", tiết 2" + "\n", true);
-                addBulletPoint(stringBuilder1, "\n", false);
-                addBulletPoint(stringBuilder1, "08:20      ", false);
-                addBulletPoint(stringBuilder1, "Giáo viên: null", false);
-                txt2.setText(stringBuilder1);
-
-                addBulletPoint(stringBuilder2, "08:35      ", false);
-                addBulletPoint(stringBuilder2, "Môn học: " + T3 + "\n", true);
-                addBulletPoint(stringBuilder2, "\n", false);
-                addBulletPoint(stringBuilder2, "     |           ", false);
-                addBulletPoint(stringBuilder2, "Sáng thứ " + Dateset + ", tiết 3" + "\n", true);
-                addBulletPoint(stringBuilder2, "\n", false);
-                addBulletPoint(stringBuilder2, "09:15      ", false);
-                addBulletPoint(stringBuilder2, "Giáo viên: null", false);
-                txt3.setText(stringBuilder2);
-
-                addBulletPoint(stringBuilder3, "09:15      ", false);
-                addBulletPoint(stringBuilder3, "Môn học: " + T4 + "\n", true);
-                addBulletPoint(stringBuilder3, "\n", false);
-                addBulletPoint(stringBuilder3, "     |           ", false);
-                addBulletPoint(stringBuilder3, "Sáng thứ " + Dateset + ", tiết 4" + "\n", true);
-                addBulletPoint(stringBuilder3, "\n", false);
-                addBulletPoint(stringBuilder3, "10:05      ", false);
-                addBulletPoint(stringBuilder3, "Giáo viên: null", false);
-                txt4.setText(stringBuilder3);
-
-                if(T5 != null) {
-                    addBulletPoint(stringBuilder4, "10:20      ", false);
-                    addBulletPoint(stringBuilder4, "Môn học: " + T5 + "\n", true);
-                    addBulletPoint(stringBuilder4, "\n", false);
-                    addBulletPoint(stringBuilder4, "     |           ", false);
-                    addBulletPoint(stringBuilder4, "Sáng thứ " + Dateset + ", tiết 5" + "\n", true);
-                    addBulletPoint(stringBuilder4, "\n", false);
-                    addBulletPoint(stringBuilder4, "11:05      ", false);
-                    addBulletPoint(stringBuilder4, "Giáo viên: null", false);
-                    txt5.setText(stringBuilder4);
+                else {
+                    txt1.setVisibility(View.GONE);
+                    txt2.setVisibility(View.GONE);
+                    txt3.setVisibility(View.GONE);
+                    txt4.setVisibility(View.GONE);
+                    txt5.setVisibility(View.GONE);
                 }
-                t1.setVisibility(T1 != null ? View.VISIBLE : View.GONE);
-                t2.setVisibility(T2 != null ? View.VISIBLE : View.GONE);
-                t3.setVisibility(T3 != null ? View.VISIBLE : View.GONE);
-                t4.setVisibility(T4 != null ? View.VISIBLE : View.GONE);
-                t5.setVisibility(T5 != null ? View.VISIBLE : View.GONE);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -317,7 +452,8 @@ public class Calendarclass extends AppCompatActivity {
         LinearLayout a1_11 = dialog.findViewById(R.id.a1_11);
         LinearLayout a2_11 = dialog.findViewById(R.id.a2_11);
         LinearLayout p_11 = dialog.findViewById(R.id.p_11);
-        LinearLayout sd_11 = dialog.findViewById(R.id.sd_11);
+        LinearLayout su_11 = dialog.findViewById(R.id.su_11);
+        LinearLayout dia_11 = dialog.findViewById(R.id.dia_11);
 
         LinearLayout t1_10 = dialog.findViewById(R.id.t1_10);
         LinearLayout t2_10 = dialog.findViewById(R.id.t2_10);
@@ -330,7 +466,8 @@ public class Calendarclass extends AppCompatActivity {
         LinearLayout a2_10 = dialog.findViewById(R.id.a2_10);
         LinearLayout p_10 = dialog.findViewById(R.id.p_10);
         LinearLayout su_10 = dialog.findViewById(R.id.su_10);
-        LinearLayout dia_10 = dialog.findViewById(R.id.dịa_10);
+        LinearLayout dia_10 = dialog.findViewById(R.id.dia_10);
+        LinearLayout trung_10 = dialog.findViewById(R.id.trung_10);
 
         t1_12.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,6 +479,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -358,6 +496,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -374,6 +513,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -390,6 +530,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -406,6 +547,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -422,6 +564,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -438,6 +581,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -454,6 +598,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -470,6 +615,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -486,6 +632,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -502,6 +649,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -518,6 +666,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -534,6 +683,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -550,6 +700,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -566,6 +717,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -582,6 +734,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -598,6 +751,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -614,6 +768,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -630,6 +785,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -646,6 +802,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -662,22 +819,41 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
             }
         });
 
-        sd_11.setOnClickListener(new View.OnClickListener() {
+        su_11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Change = "11SD";
-                String msg = "Bạn đang xem thời khoá biểu lớp 11 Sử - Địa";
+                Change = "11SU";
+                String msg = "Bạn đang xem thời khoá biểu lớp 11 Sử";
                 try {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
+                }catch (Exception e) {
+                    Log.d("Loi update", "Loi", e);
+                }
+            }
+        });
+
+        dia_11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Change = "11DIA";
+                String msg = "Bạn đang xem thời khoá biểu lớp 11 Địa";
+                try {
+                    savechoose.deleteAll(db1);
+                    savechoose.Insert(db1, Change);
+                    txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -694,6 +870,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -710,6 +887,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -726,6 +904,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -742,6 +921,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -758,6 +938,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -774,6 +955,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -790,6 +972,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -806,6 +989,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -822,6 +1006,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -838,6 +1023,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -854,6 +1040,7 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
@@ -870,12 +1057,29 @@ public class Calendarclass extends AppCompatActivity {
                     savechoose.deleteAll(db1);
                     savechoose.Insert(db1, Change);
                     txt.setText(msg);
+                    recreate();
                 }catch (Exception e) {
                     Log.d("Loi update", "Loi", e);
                 }
             }
         });
 
+        trung_10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Change = "10TRUNG";
+                String msg = "Bạn đang xem thời khoá biểu lớp 10 Trung";
+                try {
+                    savechoose.deleteAll(db1);
+                    savechoose.Insert(db1, Change);
+                    txt.setText(msg);
+                    recreate();
+                }catch (Exception e) {
+                    Log.d("Loi update", "Loi", e);
+                }
+            }
+        });
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

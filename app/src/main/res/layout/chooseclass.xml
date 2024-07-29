@@ -169,7 +169,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="12 Toán 1"
+                android:text="11 Toán 1"
                 android:fontFamily="@font/font1"
                 android:textSize="25sp"
                 android:textColor="@color/black"/>
@@ -247,7 +247,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="12 Văn"
+                android:text="11 Văn"
                 android:fontFamily="@font/font1"
                 android:textSize="25sp"
                 android:textColor="@color/black"/>
@@ -292,14 +292,27 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/sd_11"
+            android:id="@+id/su_11"
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <TextView
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="11 sử địa"
+                android:text="11 Sử"
+                android:fontFamily="@font/font1"
+                android:textSize="25sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dia_11"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="11 địa"
                 android:fontFamily="@font/font1"
                 android:textSize="25sp"
                 android:textColor="@color/black"/>
@@ -448,7 +461,7 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/dịa_10"
+            android:id="@+id/dia_10"
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <TextView
@@ -456,6 +469,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="10 Địa"
+                android:fontFamily="@font/font1"
+                android:textSize="25sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/trung_10"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="10 Trung"
                 android:fontFamily="@font/font1"
                 android:textSize="25sp"
                 android:textColor="@color/black"/>

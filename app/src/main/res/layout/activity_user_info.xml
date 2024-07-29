@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/blue">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp"
+        android:text="Chào mừng"
+        android:textColor="@color/white"
+        android:layout_marginTop="200dp"
+        android:textStyle="bold"/>
+    <EditText
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:id="@+id/etFullName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Họ và tên"
+        android:textSize="@dimen/text25sp"
+        android:background="@drawable/edittext2"
+        android:layout_centerVertical="true"/>
+
+    <EditText
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/etClass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Lớp. VD: 10T1, 10SU, 10DIA,.."
+        android:textSize="@dimen/text25sp"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/etFullName"
+        android:background="@drawable/edittext2"
+        />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etClass"/>
+</RelativeLayout>
